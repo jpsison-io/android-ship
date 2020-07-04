@@ -1,0 +1,3 @@
+io.jpsison.ship_processor.processors.ActivityShipProcessor
+io.jpsison.ship_processor.processors.FragmentShipProcessor
+io.jpsison.ship_processor.processors.ShipProcessor
