@@ -12,7 +12,12 @@ import javax.lang.model.element.TypeElement
 import javax.lang.model.util.Elements
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import io.jpsison.ship_processor.DTOProcessor
+import java.io.File
 import java.io.IOException
+import javax.tools.DocumentationTool
+import javax.tools.JavaFileManager
+import javax.tools.JavaFileObject
+import javax.tools.StandardLocation
 
 open class ShipProcessor : AbstractProcessor() {
 
@@ -22,7 +27,7 @@ open class ShipProcessor : AbstractProcessor() {
     protected lateinit var elementUtils: Elements
 
     private val androidPackage = "android.content"
-    private val libraryPackage = "io.jpsison.androidship"
+    private val libraryPackage = "io.jpsison.ship_annotation"
 
     private val kClass = ClassName.bestGuess("kotlin.reflect.KClass")
     private val kLazy = ClassName.bestGuess("kotlin.Lazy")
@@ -66,7 +71,9 @@ open class ShipProcessor : AbstractProcessor() {
                 .build()
                 .writeTo(filer)
         } catch (e: IOException) {
-            e.printStackTrace()
+            if (!e.localizedMessage.contains("Attempt to reopen a file for path", true)) {
+                e.printStackTrace()
+            }
         }
     }
 
@@ -150,7 +157,9 @@ open class ShipProcessor : AbstractProcessor() {
         try {
             file.writeTo(filer)
         } catch (e: IOException) {
-            e.printStackTrace()
+            if (!e.localizedMessage.contains("Attempt to reopen a file for path", true)) {
+                e.printStackTrace()
+            }
         }
     }
 

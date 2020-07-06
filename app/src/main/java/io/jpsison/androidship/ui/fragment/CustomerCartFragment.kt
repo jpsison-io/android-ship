@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.jpsison.androidship.R
-import io.jpsison.androidship.cargo
 import io.jpsison.androidship.cargo.Checkout
 import io.jpsison.ship_annotation.FragmentShip
+import io.jpsison.ship_annotation.cargo
 
 @FragmentShip(cargo = Checkout::class)
 class CustomerCartFragment : Fragment() {
